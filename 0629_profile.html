@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 이솝우화</title>
+    <style>
+        @font-face {
+            font-family: 'HeirofLightBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'YUniverse-B';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_yuniverse@1.0/YUniverse-B.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'EliceDigitalBaeum_Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            /*쨍한 파랑 #080055, 바꾼 색상 #183072*/
+            font-family: 'GangwonEdu_OTFBoldA';
+            background-color: #2e2d2a;
+            color: rgb(255, 255, 255);
+        }
+
+        header {
+            border-bottom: 1px solid rgb(255, 255, 255);
+            padding-left: 20px;
+        }
+
+        div {
+            padding: 15px;
+        }
+
+        content {
+            float: left;
+            border-left: 1px solid rgb(255, 255, 255);
+            height: 300px;
+            padding: 15px;
+            padding-bottom: 40px;
+        }
+
+        footer {
+            clear: left;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-color: #eaded5;
+            clear: left;
+        }
+
+        th {
+            color: #2e2d2a;
+            background-color: #ffffff;
+            width: 68px;
+            text-align: left;
+            padding-bottom: 8px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-bottom-color: #2e2d2a;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td {
+            padding-left: 10px;
+        }
+
+        /*캐러셀*/
+        .slide-container {
+            width: 240vw;
+            transition: all 1s;
+            text-align: center;
+        }
+
+        .slide-box {
+            width: 80vw;
+            float: left;
+        }
+
+        .slide-box img {
+            width: 40%;
+            height: 40%;
+        }
+
+        .next {
+            width: 10vw;
+            float: right;
+            margin-top: 15%;
+            border: none;
+            font-size: 30px;
+            position: relative;
+        }
+
+        .past {
+            width: 10vw;
+            float: left;
+            margin-top: 15%;
+            border: none;
+            font-size: 30px;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .button-slide {
+            text-align: center;
+        }
+
+        button {
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+        }
+    .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2e2d2a;
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -40%);
+        }
+
+        .show .popup {
+            transform: translate(-50% -50%);
+            transition: all 0.5s;
+        }
+
+        button {
+            border: none;
+            outline: 0;
+            background-color: #2e2d2a;
+            color: #ffdab9;
+        }
+        table {
+                width: 100%;
+            }
+
+        /*캐러셀끝*/
+        /*토스트메시지*/
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            padding: 15px 20px;
+            transform: translate(-50%, 10px);
+            border-radius: 30px;
+            overflow: hidden;
+            font-size: .8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .5s, visibility .5s, transform .5s;
+            background: rgba(0, 0, 0, .35 );
+            color: #fff;
+            z-index: 10000;
+            text-align: center;
+        }
+        #toast.reveal {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%,0);
+        }
+        #토스트{
+            color: #ffffff;
+            padding: 0;
+        }
+        #프로필내용{
+            line-height: 20px;
+            text-align: left;
+            
+        }
+        /*프로필사진*/
+        #프로필사진{
+            text-align: center;
+            float: left;
+        }
+        #email {
+            color: #ffffff;
+        }
+        #email:hover{
+            color:#c59469;
+        }
+        #email:link{
+            color:#ffdab9;
+        }
+        /*여기부터 복붙*/
+        @media(max-width:576px) {
+            .goaqjrj {
+                display: inline;
+                background-color: #2e2d2a;
+                padding: 8px;
+                font-size: 15px;
+                border: none;
+                /*6.8*/
+                position: relative;
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+            }
+
+            .dropdown-content {
+                background-color: #2e2d2a;
+                display: none;
+                top: 7px;
+                min-width: 180px;
+                min-height: 300px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                position: absolute;
+                left: -180px;
+                /*기준위치보다 200px 아래로*/
+                opacity: 0;
+                /*화면에 보이지않게*/
+                z-index: 10;
+                /*다른요소보다 위에 있도록*/
+            }
+
+            .dropdown-content:hover {
+                opacity: 1;
+                /*설명글이 화면에 보이게*/
+                transform: translateX(180px);
+                /*설명글이 위로 200px 이동하게*/
+                transition: all 0.6s ease-in-out;
+                /*나타날때 부드럽게 트랜지션 추가*/
+            }
+
+            .dropdown-content a {
+                color: rgb(255, 255, 255);
+                padding: 8px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: rgb(255, 177, 113);
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropdown-button {
+                background-color: rgb(255, 177, 113);
+            }
+            #프로필내용{
+            line-height: 20px;
+            text-align: center;
+            }
+            #프로필사진{
+            width:100%;
+            height:auto;
+            }
+        }
+/*팝업*/
+        
+        @media(min-width:576px) {
+            div {
+                order: 1;
+               border: none;
+                width: 100%;
+                padding-left: 0;
+            }
+
+            ul {
+                list-style: none;
+                text-align: center;
+                padding-left: 0;
+                /*-*/
+                background-color: #2e2d2a;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+
+            }
+
+            li {
+                display: inline;
+                margin: auto;
+                border: none;
+                border: 1px solid;
+                border-color: rgb(255, 255, 255);
+                ;
+                margin: 5px;
+                padding: .5em;
+                line-height: 8px;
+                /*-*/
+                float: left;
+                border-right: solid 1px white;
+            }
+
+            content {
+                order: 2;
+                clear: left;
+                border: none;
+                height: 70px;
+                width: auto;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            /*복붙*/
+            li a {
+                display: block;
+                background-color: #2e2d2a;
+                color: #ffffff;
+                padding: 8px;
+                text-decoration: none;
+                text-align: center;
+                font-weight: bold;
+            }
+
+
+            li:hover a {
+                background-color: rgb(255, 177, 113);
+                color: white;
+            }
+
+            li:hover {
+                background-color: rgb(255, 177, 113);
+                color: white;
+            }
+
+            .goaqjrj {
+                display: none;
+                background-color: #ffdab9;
+                padding: 8px;
+                font-size: 15px;
+                border: none;
+            }
+            #프로필사진{
+            width:40%;
+            height:auto;
+            margin: 0;
+            display: inline-block;
+            }
+            #프로필내용{
+            width:40%;
+            height:auto;
+            margin: 0;
+            padding-top: 330px;
+            display: inline-block;
+            }
+            #프로필전체{
+            text-align: center;
+            margin: 10px auto;
+            padding-left: 18%;
+            width: 70%;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>이솝우화</h1>
+    </header>
+    <div class="dropdown">
+        <button class="goaqjrj" style="color: #ffffff">≡</button>
+        <div class="dropdown-content">
+            <ul>
+                <li onclick="setInner1()"><a href="page.html"> 사자 </a></li>
+                <li onclick="setInner2()"><a href="page.html"> 양 </a></li>
+                <li onclick="setInner3()"><a href="page.html"> 여우 </a></li>
+                <li onclick="setInner4()"><a href="page.html"> 늑대 </a></li>
+                <li onclick="setInner5()"><a href="0615_kakaomap.html"> 일한 곳 </a></li>
+                <li onclick="setInner4()"><a href="#"> 프로필 </a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="프로필전체">
+        <div id="프로필사진">
+            <img src="사진/프로필.png" >
+        </div>
+        <div id="프로필내용">
+            김유진<br>
+            +82.10.9765.9094<br>
+            <a id="email" href="mailto:eujenekim@naver.com?subject=feedback">eujenekim@naver.com</a><br>
+            inster:eujene_1<br>
+            <div id="toast"></div>
+            <button id="토스트"onclick='toast("<img src=\"사진/김유진 카카오톡 큐알코드.jpg\"width=300px height=300px>")'>카카오톡</button>
+        </div>
+    </div>
+    <script>
+        let removeToat;
+
+        function toast(string) {
+            const toast = document.getElementById("toast")
+
+            toast.classList.contains("reveal")?
+                (clearTimeout(removeToat), removeToat = setTimeout(function (){
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)) :
+                removeToat=setTimeout(function(){
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)
+            toast.classList.add("reveal"),
+                toast.innerHTML = string
+        }
+    </script>
+
+</body>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 이솝우화</title>
+    <style>
+        @font-face {
+            font-family: 'HeirofLightBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'YUniverse-B';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_yuniverse@1.0/YUniverse-B.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'EliceDigitalBaeum_Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EliceDigitalBaeum_Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            /*쨍한 파랑 #080055, 바꾼 색상 #183072*/
+            font-family: 'GangwonEdu_OTFBoldA';
+            background-color: #2e2d2a;
+            color: rgb(255, 255, 255);
+        }
+
+        header {
+            border-bottom: 1px solid rgb(255, 255, 255);
+            padding-left: 20px;
+        }
+
+        div {
+            padding: 15px;
+        }
+
+        content {
+            float: left;
+            border-left: 1px solid rgb(255, 255, 255);
+            height: 300px;
+            padding: 15px;
+            padding-bottom: 40px;
+        }
+
+        footer {
+            clear: left;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-color: #eaded5;
+            clear: left;
+        }
+
+        th {
+            color: #2e2d2a;
+            background-color: #ffffff;
+            width: 68px;
+            text-align: left;
+            padding-bottom: 8px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-bottom-color: #2e2d2a;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        td {
+            padding-left: 10px;
+        }
+
+        /*캐러셀*/
+        .slide-container {
+            width: 240vw;
+            transition: all 1s;
+            text-align: center;
+        }
+
+        .slide-box {
+            width: 80vw;
+            float: left;
+        }
+
+        .slide-box img {
+            width: 40%;
+            height: 40%;
+        }
+
+        .next {
+            width: 10vw;
+            float: right;
+            margin-top: 15%;
+            border: none;
+            font-size: 30px;
+            position: relative;
+        }
+
+        .past {
+            width: 10vw;
+            float: left;
+            margin-top: 15%;
+            border: none;
+            font-size: 30px;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .button-slide {
+            text-align: center;
+        }
+
+        button {
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+        }
+    .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2e2d2a;
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -40%);
+        }
+
+        .show .popup {
+            transform: translate(-50% -50%);
+            transition: all 0.5s;
+        }
+
+        button {
+            border: none;
+            outline: 0;
+            background-color: #2e2d2a;
+            color: #ffdab9;
+        }
+        table {
+                width: 100%;
+            }
+
+        /*캐러셀끝*/
+
+        /*여기부터 복붙*/
+        @media(max-width:576px) {
+            .goaqjrj {
+                display: inline;
+                background-color: #2e2d2a;
+                padding: 8px;
+                font-size: 15px;
+                border: none;
+                /*6.8*/
+                position: relative;
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+            }
+
+            .dropdown-content {
+                background-color: #2e2d2a;
+                display: none;
+                top: 7px;
+                min-width: 180px;
+                min-height: 300px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                position: absolute;
+                left: -180px;
+                /*기준위치보다 200px 아래로*/
+                opacity: 0;
+                /*화면에 보이지않게*/
+                z-index: 10;
+                /*다른요소보다 위에 있도록*/
+            }
+
+            .dropdown-content:hover {
+                opacity: 1;
+                /*설명글이 화면에 보이게*/
+                transform: translateX(180px);
+                /*설명글이 위로 200px 이동하게*/
+                transition: all 0.6s ease-in-out;
+                /*나타날때 부드럽게 트랜지션 추가*/
+            }
+
+            .dropdown-content a {
+                color: rgb(255, 255, 255);
+                padding: 8px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: rgb(255, 177, 113);
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropdown-button {
+                background-color: rgb(255, 177, 113);
+            }
+        }
+/*팝업*/
+        
+        @media(min-width:576px) {
+            div {
+                order: 1;
+               border: none;
+                width: 100%;
+                padding-left: 0;
+            }
+
+            ul {
+                list-style: none;
+                text-align: center;
+                padding-left: 0;
+                /*-*/
+                background-color: #2e2d2a;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+
+            }
+
+            li {
+                display: inline;
+                margin: auto;
+                border: none;
+                border: 1px solid;
+                border-color: rgb(255, 255, 255);
+                ;
+                margin: 5px;
+                padding: .5em;
+                line-height: 8px;
+                /*-*/
+                float: left;
+                border-right: solid 1px white;
+            }
+
+            content {
+                order: 2;
+                clear: left;
+                border: none;
+                height: 70px;
+                width: auto;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            /*복붙*/
+            li a {
+                display: block;
+                background-color: #2e2d2a;
+                color: #ffffff;
+                padding: 8px;
+                text-decoration: none;
+                text-align: center;
+                font-weight: bold;
+            }
+
+
+            li:hover a {
+                background-color: rgb(255, 177, 113);
+                color: white;
+            }
+
+            li:hover {
+                background-color: rgb(255, 177, 113);
+                color: white;
+            }
+
+            .goaqjrj {
+                display: none;
+                background-color: #ffdab9;
+                padding: 8px;
+                font-size: 15px;
+                border: none;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>이솝우화</h1>
+    </header>
+    <div class="dropdown">
+        <button class="goaqjrj" style="color: #ffffff">≡</button>
+        <div class="dropdown-content">
+            <ul>
+                <li onclick="setInner1()"><a href="#"> 사자 </a></li>
+                <li onclick="setInner2()"><a href="#"> 양 </a></li>
+                <li onclick="setInner3()"><a href="#"> 여우 </a></li>
+                <li onclick="setInner4()"><a href="#"> 늑대 </a></li>
+                <li onclick="setInner5()"><a href="0615_kakaomap.html"> 일한 곳 </a></li>
+                <li onclick="setInner4()"><a href="0629_profile.html"> 프로필 </a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="전체">
+        <content id="본문">
+            '이솝우화'는 여러 동물들의 행동과 성격을 빌어 각양각색의 인간군상을 재치와 유머로 꼬집는다.
+            어린시절부터 들어왔던 '토끼와 거북이','황새와 여우','도시 쥐와 서울 쥐'등 동화 같은 이야기에서부터,
+            '오만한 노새','무리한 경쟁','여우의 지혜'처럼 인생에 대한 깊은 통찰을 담은 이야기까지 인간 사회의 단면을
+            예리한 시선으로 풍자하고 있다.
+        </content>
+        <button id="show">다른이미지</button>
+
+        <div id="사자2">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th id="one" colspan="2" style="background-color: #eaded5">사자
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="background">
+            <div class="window">
+                <div class="popup">
+                    <img src="사진/편디10.png" width=500px height="500px">
+                    <button id="close">X</button>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <article class="button-next">
+            <button class="next"><img src="사진/next.png"></button>
+        </article>
+        <article class="button-past">
+            <button class="past"><img src="사진/past.png"></button>
+        </article>
+
+        <article style="overflow:hidden">
+            <article class="slide-container">
+                <article class="slide-box">
+                    <img src="사진/편디5.png" alt="" />
+                </article>
+                <article class="slide-box">
+                    <img src="사진/편디6.png" alt="" />
+                </article>
+                <article class="slide-box">
+                    <img src="사진/편디7.png" alt="" />
+                </article>
+            </article>
+        </article>
+        <article class="button-slide">
+            <button class="slide1">1</button>
+            <button class="slide2">2</button>
+            <button class="slide3">3</button>
+        </article>
+
+
+        <div id="사자">
+            <table border="1">
+                <colgroup>
+                    <col style="background-color: rgb(255, 255, 255);">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th id="one" colspan="2" style="background-color: #eaded5">
+                            수록 작품
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>페이지</th>
+                        <td>제목</td>
+                    </tr>
+                    <tr>
+                        <th>p.10</th>
+                        <td>여우의 지혜</td>
+                    </tr>
+                    <tr>
+                        <th>p.16</th>
+                        <td>사자에게 당하다.</td>
+                    </tr>
+                    <tr>
+                        <th>p.18</th>
+                        <td>사자를 밟는 생쥐</td>
+                    </tr>
+                    <tr>
+                        <th>p.28</th>
+                        <td>사자와 개구리</td>
+                    </tr>
+                    <tr>
+                        <th>p.32</th>
+                        <td>여우의 반격</td>
+                    </tr>
+                    <tr>
+                        <th>p.34</th>
+                        <td>사자의 차별대우</td>
+                    </tr>
+                    <tr>
+                        <th>p.38</th>
+                        <td>사자의 발자국</td>
+                    </tr>
+                    <tr>
+                        <th>p.40</th>
+                        <td>사자와 멧돼지</td>
+                    </tr>
+                    <tr>
+                        <th>p.42</th>
+                        <td>수탉을 두려워하는 사자</td>
+                    </tr>
+                    <tr>
+                        <th>p.48</th>
+                        <td>모기와 사자</td>
+                    </tr>
+                    <tr>
+                        <th>p.52</th>
+                        <td>운명의 장난</td>
+                    </tr>
+                    <tr>
+                        <th>p.56</th>
+                        <td>사자와 나귀</td>
+                    </tr>
+                    <tr>
+                        <th>p.58</th>
+                        <td>어부지리</td>
+                    </tr>
+                    <tr>
+                        <th>p.62</th>
+                        <td>경험으로 배우다.</td>
+                    </tr>
+                    <tr>
+                        <th>p.76</th>
+                        <td>사자와 황소</td>
+                    </tr>
+                    <tr>
+                        <th>p.78</th>
+                        <td>여우가 사자를 만났을 때</td>
+                    </tr>
+                    <tr>
+                        <th>p.80</th>
+                        <td>늑대의 그림자</td>
+                    </tr>
+                    <tr>
+                        <th>p.84</th>
+                        <td>암사자</td>
+                    </tr>
+                    </tbody>
+                <tfoot>
+                    <tr>
+                        <th>p.87</th>
+                        <td>수탉과 나귀와 사자</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <!--두번째 단어-->
+    <pre>
+
+        </pre>
+    <div id="양">
+        <table border="1">
+            <colgroup>
+                <col style="background-color: rgb(255, 255, 255);">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th id="꿀비1" colspan="2">꿀비
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th id="two" colspan="2"
+                        style="text-align:center; background-color: #2e2d2a;border-bottom-color:rgb(255, 255, 255) ;">
+                        <img src="감파르다.png" width="auto" height="250px">
+                        </td>
+                </tr>
+                <tr>
+                    <th>
+                        뜻
+                    </th>
+                    <td>
+                        곡식이 꿀처럼 달게 받아먹을 비라는 뜻으로 농작물이 자라는데 꼭 필요할 때 마침 내리는 비를 이르는 말
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>상세 설명</th>
+                    <td>긍정적으로 강조하고 싶을 때 '꿀'을 써서 꿀잼, 꿀맛이라 표현하는 것 처럼 오래된 순 우리말 중에 이와 비슷하게 사용하는 단어이다. .</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <footer>
+        <a href="http://www.naver.com">네이버 바로가기</a>
+    </footer>
+
+
+    <script>
+        function show() {
+            document.querySelector(".background").className = "background show";
+        }
+
+        function close() {
+            document.querySelector(".background").className = "background";
+        }
+
+        document.querySelector("#show").addEventListener("click", show);
+        document.querySelector("#close").addEventListener("click", close);
+        function setInner1() {
+            const element = document.getElementById("one");
+            element.innerHTML
+                = `사자`;
+        }
+        function setInner2() {
+            const element = document.getElementById("one");
+            element.innerText
+                = `양`;
+        }
+        function setInner3() {
+            const element = document.getElementById("one");
+            element.innerText
+                = `나루해오름`;
+        }
+        function setInner4() {
+            const element = document.getElementById("one");
+            element.innerText
+                = `두메꽃`;
+        }
+
+        /**/
+        function setInner1() {
+            const element = document.getElementById("two");
+            element.innerHTML
+                = `감파르다`;
+        }
+        function setInner2() {
+            const element = document.getElementById("two");
+            element.innerText
+                = `꿀비`;
+        }
+        function setInner3() {
+            const element = document.getElementById("two");
+            element.innerText
+                = `나루해오름`;
+        }
+        function setInner4() {
+            const element = document.getElementById("two");
+            element.innerText
+                = `두메꽃`;
+        }
+
+
+        /**/
+        function setInner1() {
+            const element = document.getElementById("3");
+            element.innerHTML
+                = ` 검다의 의미를 지닌 감과 푸르다가 결합된 합성어,<br>
+                    검은 빛을 띤 푸른색의 의미`;
+        }
+        function setInner2() {
+            const element = document.getElementById("3");
+            element.innerText
+                = `곡식이 꿀처럼 달게 받아먹을 비라는 뜻으로 농작물이 자라는데 꼭 필요할 때 마침 내리는 비를 이르는 말`;
+        }
+        function setInner3() {
+            const element = document.getElementById("3");
+            element.innerText
+                = `강나루에 해가 떠오름`;
+        }
+        function setInner4() {
+            const element = document.getElementById("3");
+            element.innerText
+                = `깊은 산골에 피어있는 꽃`;
+        }
+
+
+        /*캐러셀*/
+        var curPicture = 1;
+        document.querySelector(".slide1").addEventListener("click", function () {
+            curPicture = 1;
+            document.querySelector(".slide-container").style.transform =
+                "translateX(0vw)";
+        })
+        document.querySelector(".slide2").addEventListener("click", function () {
+            curPicture = 2;
+            document.querySelector(".slide-container").style.transform =
+                "translateX(-80vw)";
+        })
+        document.querySelector(".slide3").addEventListener("click", function () {
+            curPicture = 3;
+            document.querySelector(".slide-container").style.transform =
+                "translateX(-160vw)";
+        })
+
+        document.querySelector(".next").addEventListener("click", function () {
+            if (curPicture >= 3) {
+                document.querySelector(".slide-container").style.transform =
+                    "translateX(-160vw)";
+            } else {
+                document.querySelector(".slide-container").style.transform =
+                    "translateX(-" + (curPicture * 80) + "vw)";
+                curPicture += 1;
+            }
+        })
+
+        document.querySelector(".past").addEventListener("click", function () {
+            if (curPicture <= 1) {
+                document.querySelector(".slide-container").style.transform =
+                    "translateX(0vw)";
+            } else {
+                document.querySelector(".slide-container").style.transform =
+                    "translateX(-" + ((curPicture - 2) * 80) + "vw)";
+                curPicture -= 1;
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오지도</title>
+    <style>
+         @font-face {
+            font-family: 'GangwonEdu_OTFBoldA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+    
+        body{
+            /*쨍한 파랑 #080055, 바꾼 색상 #183072*/
+            font-family: 'GangwonEdu_OTFBoldA';
+            background-color: #2e2d2a;
+            color: rgb(255, 255, 255);
+            }
+        header{
+            border-bottom: 1px solid rgb(255, 255, 255);
+            padding-left: 20px;
+        }    
+        @media(max-width:576px){
+            .maaap {
+                width: 100%;
+                height: 300px;
+            }
+            .goaqjrj{
+            display: inline;
+            background-color: #2e2d2a;
+            padding: 8px;
+            font-size: 15px;
+            border: none;
+            /*6.8*/
+            position: relative;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+            height: 20px;
+        }
+        .dropdown-content {
+            background-color: #2e2d2a;
+            display: none;
+            top: 7px;
+            min-width: 180px;
+            min-height: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: absolute;
+            left:-180px; /*기준위치보다 200px 아래로*/
+            opacity: 0; /*화면에 보이지않게*/
+            z-index: 10; /*다른요소보다 위에 있도록*/
+        }
+        .dropdown-content:hover {
+            opacity: 1; /*설명글이 화면에 보이게*/
+            transform: translateX(180px); /*설명글이 위로 200px 이동하게*/
+            transition: all 0.6s ease-in-out; /*나타날때 부드럽게 트랜지션 추가*/
+        }
+        .dropdown-content a{
+            color: rgb(255, 255, 255);
+            padding: 8px;
+            text-decoration: none;
+            display: block;
+        }   
+        .dropdown-content a:hover { background-color: rgb(255, 177, 113);}
+        .dropdown:hover .dropdown-content { display: block;}
+        .dropdown:hover .dropdown-button {background-color: rgb(255, 177, 113);}
+        }
+        @media(min-width:576px){
+            div {
+                order: 1;
+                display: inline;
+                border: none;
+                width: 100%;
+                padding-left: 0;
+            }
+            ul{
+                list-style: none;
+                text-align: center;
+                padding-left: 0;
+                /*-*/
+                background-color: #2e2d2a;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                
+            }
+            li {
+                display: inline;
+                margin: auto;
+                border: none;
+                border: 1px solid;
+                border-color: rgb(255, 255, 255);;
+                margin: 5px;
+                padding: .5em;
+                line-height: 8px;
+                 /*-*/
+                float: left;
+                border-right: solid 1px white;
+            }    
+            content{
+                order: 2;
+                clear: left;
+                border: none;
+                height: 70px;
+                width: auto;
+            }
+            table{
+                width: 100%;
+            }
+            /*복붙*/
+            li a {
+                display: block;
+                background-color:  #2e2d2a;
+                color: #ffffff;
+                padding: 8px;
+                text-decoration: none;
+                text-align: center;
+                font-weight: bold;
+            }
+            
+        
+            li:hover a {
+                background-color:  rgb(255, 177, 113);
+                color: white;
+            }
+            li:hover {
+                background-color:  rgb(255, 177, 113);
+                color: white;
+            }
+            .goaqjrj{
+            display: none;
+            background-color: #ffdab9;
+            padding: 8px;
+            font-size: 15px;
+            border: none;
+        }
+        
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>이솝우화</h1>
+    </header>
+    <div class="dropdown">
+        <button class="goaqjrj" style="color: #ffffff">≡</button>
+        <div class="dropdown-content">
+            <ul>
+                <li onclick="setInner1()"><a href="page.html"> 사자 </a></li>
+                <li onclick="setInner2()"><a href="page.html"> 양 </a></li>
+                <li onclick="setInner3()"><a href="page.html"> 여우 </a></li>
+                <li onclick="setInner4()"><a href="page.html"> 늑대 </a></li>
+                <li onclick="setInner5()"><a href="0615_kakaomap.html"> 일한 곳 </a></li>
+                <li onclick="setInner4()"><a href="0629_profile.html"> 프로필 </a></li>
+            </ul>
+        </div>
+        <ul id="maaap">
+            <li onclick="showmap(37.598424649659854,127.09136641128471)"><a href="#">입시학원</a></li>
+            <li onclick="showmap(37.590095368112074, 127.08789435054432)"><a href="#">아동학원</a></li>
+            <li onclick="showmap2(37.594214215009025,127.09062383986931, 37.598424649659854, 127.09136641128471,37.590095368112074, 127.08789435054432,37.597967688643976, 127.0895158316991)"><a href="#">전체</a></li>
+        </ul>
+    </div>
+        <section id="maap">
+            <section id="map" style="width:100%;height:350px;"></section>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a6a6633bf180efd4ca90c6060ef49763"></script>
+    <script>
+            function showmap(a,b){
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                    mapOption = { 
+                        center: new kakao.maps.LatLng(a,b), // 지도의 중심좌표
+                        level: 3 // 지도의 확대 레벨
+                    };
+
+                var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+                // 마커가 표시될 위치입니다 
+                var markerPosition  = new kakao.maps.LatLng(a,b); 
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+            }
+
+            function showmap2(a,b,c,d,e,f,g,h){
+                var map3Container = document.getElementById('map'), // 지도를 표시할 div  
+                    map3Option = { 
+                        center: new kakao.maps.LatLng(a,b), // 지도의 중심좌표
+                        level: 5 // 지도의 확대 레벨
+                    };
+
+                var map3 = new kakao.maps.Map(map3Container, map3Option); // 지도를 생성합니다
+                
+                // 마커를 표시할 위치와 title 객체 배열입니다 
+                var positions = [
+                    {
+                        title: '디자인 일공공 미술학원', 
+                        latlng: new kakao.maps.LatLng(c,d)
+                    },
+                    {
+                        title: '다래미술학원', 
+                        latlng: new kakao.maps.LatLng(e,f)
+                    },
+                    {
+                        title: '상상스케치', 
+                        latlng: new kakao.maps.LatLng(g,h)
+                    },
+                ];
+
+                // 마커 이미지의 이미지 주소입니다
+                var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+                    
+                for (var i = 0; i < positions.length; i ++) {
+                    
+                    // 마커 이미지의 이미지 크기 입니다
+                    var imageSize = new kakao.maps.Size(24, 35); 
+                    
+                    // 마커 이미지를 생성합니다    
+                    var marker3Image = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+                    
+                    // 마커를 생성합니다
+                    var marker3 = new kakao.maps.Marker({
+                        map: map3, // 마커를 표시할 지도
+                        position: positions[i].latlng, // 마커를 표시할 위치
+                        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image : marker3Image // 마커 이미지 
+                    });
+                }
+            }
+
+    </script>
+</body>
+</html>
