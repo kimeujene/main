@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 클릭 에니메이션</title>
+    <style>
+        @keyframes clicked {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        #clickEffect {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+        }
+        #clickEffect::after {
+            content: '''';
+            display: block;
+            height: 100%;
+            background: rgba(0, 0, 0, .3);
+            border-radius: 50%;
+        }
+        #clickEffect.effect{
+            display: block;
+        }
+        #clickEffect.effect::after{
+            animation: clicked .5s cubic-bezier(.29,0,.15,1);
+        }
+    </style>
+</head>
+<body>
+    <div id="clickEffect"></div>
+    <script>
+        let removeTimeOut;
+
+        function clickPosition(e){
+            const target = document.getElementById("clickEffect"),
+        a=40; // #clickEffect의 너비&높이 값 /2
+
+            (e.button === 0) &&(
+                target.style.transform = `translate(${e.clientX - a}px, ${e.clientY -a}px)`,
+                target.classList.contains("effect")
+                ?(
+                    clearTimeout(removeTimeOut),
+                    target.classList.remove("effect"),
+                    void target.offsetWidth,
+                    target.classList.add("effect"),
+                    removeEffect()
+                )
+                :(
+                    target.classList.add("effect"),
+                    removeEffect()
+                )
+            )
+        }
+
+        function removeEffect(){
+            removeTimeOut=setTimeout(function(){
+                document.getElementById("clickEffect").classList.remove("effect")
+            },500)//#clickEffect.effect::after의 시간 (.5s)*1000
+        }
+        document.addEventListener("mousedown", clickPosition)
+    </script>
+</body>
+</html>
